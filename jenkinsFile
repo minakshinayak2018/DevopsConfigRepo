@@ -3,7 +3,7 @@ pipeline {
     stages {
               stage('Git read') {
                       steps {
-                            git url: 'https://github.com/minakshinayak2018/app-repo.git'
+                            git url: 'https://github.com/minakshinayak2018/app-repo'
               branch: 'master'
                             echo 'Read success'
                          }
