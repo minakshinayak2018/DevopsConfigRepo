@@ -2,10 +2,15 @@ pipeline {
     agent { docker { image 'maven:3.3.3'}}
     stages {
            stage('Load properties file') {
-                  Properties properties = new Properties()
-                  properties.load(('pipeline.properties').newDataInputStream())
-                  def gitURL = properties.getProperty('gitUrl')
-                  sh echo "gitURL=${gitURL}"        
+                  def props = readProperties file:'pipeline.properties'
+                  def gitURL= props['gitUrl']
+                  def branchName=props['branchName']
+                  def sonarScan=props['buildSonarScan']
+                  def mvnClean=props['mavenClean'] 
+                  sh echo "gitURL=${gitURL}"
+                  sh echo "branchName=${branchName}"
+                  sh echo "sonarScan=${sonarScan}"
+                  sh echo "mvnClean=${mvnClean}"      
              }
               stage('Git read') {
                       steps {
