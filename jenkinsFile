@@ -7,10 +7,10 @@ pipeline {
                   def branchName=props['branchName']
                   def sonarScan=props['buildSonarScan']
                   def mvnClean=props['mavenClean'] 
-                  echo "gitURL=${gitURL}"
-                  echo "branchName=${branchName}"
-                  echo "sonarScan=${sonarScan}"
-                  echo "mvnClean=${mvnClean}"        
+                  sh echo "gitURL=${gitURL}"
+                  sh echo "branchName=${branchName}"
+                  sh echo "sonarScan=${sonarScan}"
+                  sh echo "mvnClean=${mvnClean}"        
              }
               stage('Git read') {
                       steps {
