@@ -5,7 +5,7 @@ pipeline {
                   steps {
                        script {
                              props = readProperties file:'pipeline.properties'
-                             echo 'load SUCCESS'
+                             echo 'LOAD SUCCESS'
                              }
                       }    
                }
@@ -13,14 +13,13 @@ pipeline {
                   steps {
                          git url: props.gitUrl,
                          branch: props.branchName
-                         echo 'Read SUCCESS'
-                         echo "gitURL=${git url}"
+                         echo 'READ SUCCESS'
                         }    
                    }
               stage('sonar scan..') {
                   steps {
                          sh props.buildSonarScan
-                         echo 'Sonar scan SUCCESS'
+                         echo 'SONAR SCAN SUCCESS'
                         }    
                    }
               stage('maven build..') {
