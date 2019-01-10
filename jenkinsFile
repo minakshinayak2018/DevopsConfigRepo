@@ -8,17 +8,16 @@ pipeline {
                              echo 'load SUCCESS'
                               }
                        }    
-             }
-
+               }
             stage('read properties file..') {
                   steps {
                        script {
-                             gitURL = props.gitUrl,
-                             branch = props.branchName, 
+                             gitURL: props.gitUrl,
+                             branch: props.branchName, 
                              echo 'Read SUCCESS'
                               }
                         }    
-             }
+              }
               stage('Git read') {
                       steps {
                             git url: ${gitURL},
