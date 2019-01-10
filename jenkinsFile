@@ -12,7 +12,7 @@ pipeline {
             stage('read properties file..') {
                   steps {
                            gitURL: props.gitUrl,
-                           branch: props.branchName, 
+                           branch: props.branchName
                            echo 'Read SUCCESS'
                         }    
               }
