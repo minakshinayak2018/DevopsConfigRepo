@@ -18,13 +18,13 @@ pipeline {
               }
               stage('sonar scan..') {
                   steps {
-                           scan: props.buildSonarScan,
+                           scan: props.buildSonarScan
                            echo 'Sonar scan SUCCESS'
                         }    
               }
               stage('maven build..') {
                   steps {
-                           build: props.mavenClean,
+                           build: props.mavenClean
                            echo 'Build SUCCESS'
                         }    
               }
