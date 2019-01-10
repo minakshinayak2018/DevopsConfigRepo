@@ -4,17 +4,12 @@ pipeline {
            stage('load properties file..') {
                   steps {
                        script{
-                             props = readProperties file:'pipeline.properties'
+                             props = readProperties file:'pipeline.properties',
+                             gitURL: props.gitUrl
                              echo 'load SUCCESS'
                             }
                        }    
                }
-               stage('read git url properties file..') {
-                  steps {
-                         gitURL: props.gitUrl
-                         echo 'Read Git url SUCCESS'
-                        }    
-                    }
             stage('read branch name..') {
                   steps {
                          branch: props.branchName
