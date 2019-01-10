@@ -11,11 +11,9 @@ pipeline {
                }
             stage('read properties file..') {
                   steps {
-                       script {
                              gitURL: props.gitUrl,
                              branch: props.branchName, 
                              echo 'Read SUCCESS'
-                              }
                         }    
               }
               stage('Git read') {
