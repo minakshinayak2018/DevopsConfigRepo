@@ -3,54 +3,54 @@ pipeline {
     stages {
            stage('load properties file..') {
                   steps {
-                       script {
+                       script{
                              props = readProperties file:'pipeline.properties'
                              echo 'load SUCCESS'
-                              }
+                            }
                        }    
                }
                stage('read git url properties file..') {
                   steps {
-                           gitURL: props.gitUrl
-                           echo 'Read Git url SUCCESS'
+                         gitURL: props.gitUrl
+                         echo 'Read Git url SUCCESS'
                         }    
-              }
+                    }
             stage('read branch name..') {
                   steps {
-                           branch: props.branchName
-                           echo 'Read Branch SUCCESS'
+                         branch: props.branchName
+                         echo 'Read Branch SUCCESS'
                         }    
-              }
+                    }
               stage('sonar scan..') {
                   steps {
-                           scan: props.buildSonarScan
-                           echo 'Sonar scan SUCCESS'
+                         scan: props.buildSonarScan
+                         echo 'Sonar scan SUCCESS'
                         }    
-              }
+                    }
               stage('maven build..') {
                   steps {
-                           build: props.mavenClean
-                           echo 'Build SUCCESS'
+                         build: props.mavenClean
+                         echo 'Build SUCCESS'
                         }    
-              }
+                    }
               stage('Git read') {
                       steps {
                            git url: ${gitURL},
               branch: ${branch}
                            echo 'Read success'
-                         }
-              }
+                        }
+                }
              stage('Building Sonar...') {
               steps {
                 sh ${scan}
                 echo 'Sonar scan success'
                     }
-             }
+                }
             stage('Build') { 
            steps {
                sh ${build}
                echo 'Maven Build success'
                  }  
-              }
-          }
-      }
+            }
+         }
+    }
