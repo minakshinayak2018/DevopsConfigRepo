@@ -30,7 +30,7 @@ pipeline {
                    }
               stage('Git read') {
                       steps {
-                           git url: ${giturl},
+                           git url: ${git url},
               branch: ${branch}
                            echo 'Read success'
                        }
