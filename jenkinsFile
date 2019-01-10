@@ -5,11 +5,15 @@ pipeline {
                   steps {
                        script{
                              props = readProperties file:'pipeline.properties',
-                             gitURL: props.gitUrl
                              echo 'load SUCCESS'
                             }
                        }    
-               }
+             stage('read git url properties file..') {
+                  steps {
+                         gitURL: props.gitUrl
+                         echo 'Read Git url SUCCESS'
+                        }    
+                    }
             stage('read branch name..') {
                   steps {
                          branch: props.branchName
@@ -28,6 +32,7 @@ pipeline {
                          echo 'Build SUCCESS'
                         }    
                     }
+               }     
               stage('Git read') {
                       steps {
                            git url: ${gitURL},
