@@ -11,25 +11,20 @@ pipeline {
                }
                stage('read git url file..') {
                   steps {
-                         gitURL: props.gitUrl
-                         echo 'Read Git url SUCCESS'
-                        }    
-                   }
-            stage('read branch name..') {
-                  steps {
+                         git url: props.gitUrl,
                          branch: props.branchName
-                         echo 'Read Branch SUCCESS'
+                         echo 'Read SUCCESS'
                         }    
                    }
               stage('sonar scan..') {
                   steps {
-                         scan: props.buildSonarScan
+                         sh props.buildSonarScan
                          echo 'Sonar scan SUCCESS'
                         }    
                    }
               stage('maven build..') {
                   steps {
-                         build: props.mavenClean
+                         sh props.mavenClean
                          echo 'Build SUCCESS'
                         }    
                    }
