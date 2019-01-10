@@ -14,7 +14,7 @@ pipeline {
                          git url: props.gitUrl,
                          branch: props.branchName
                          echo 'Read SUCCESS'
-                         echo git url
+                         echo "gitURL=${git url}"
                         }    
                    }
               stage('sonar scan..') {
@@ -31,20 +31,20 @@ pipeline {
                    }
               stage('Git read') {
                       steps {
-                           git url: git url
-              branch: branch
+                           git url: ${git url}
+              branch: ${branch}
                            echo 'Read success'
                        }
                 }
              stage('Building Sonar...') {
               steps {
-                sh scan
+                sh ${buildSonarScan}
                 echo 'Sonar scan success'
                     }
                }
            stage('Build') { 
              steps {
-               sh build
+               sh ${mavenClean}
                echo 'BUILD SUCCESS'
                  }  
             }
