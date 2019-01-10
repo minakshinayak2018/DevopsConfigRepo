@@ -14,6 +14,7 @@ pipeline {
                          git url: props.gitUrl,
                          branch: props.branchName
                          echo 'Read SUCCESS'
+                         echo git url
                         }    
                    }
               stage('sonar scan..') {
