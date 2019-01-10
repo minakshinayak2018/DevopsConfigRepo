@@ -9,11 +9,16 @@ pipeline {
                               }
                        }    
                }
-            stage('read properties file..') {
+               stage('read git url properties file..') {
                   steps {
                            gitURL: props.gitUrl
+                           echo 'Read Git url SUCCESS'
+                        }    
+              }
+            stage('read branch name..') {
+                  steps {
                            branch: props.branchName
-                           echo 'Read SUCCESS'
+                           echo 'Read Branch SUCCESS'
                         }    
               }
               stage('sonar scan..') {
