@@ -1,9 +1,15 @@
 pipeline {
     agent { docker { image 'maven:3.3.3'}}
-    checkout scm;
-    def props = readProperties file:'pipeline.properties',
-    stages {
-           stage('read git url properties file..') {
+        stages {
+           stage('load properties file..') {
+                  steps {
+                       script{
+                             props = readProperties file:'pipeline.properties'
+                             echo 'load SUCCESS'
+                             }
+                       }    
+               }
+               stage('read git url file..') {
                   steps {
                          gitURL: props.gitUrl
                          echo 'Read Git url SUCCESS'
