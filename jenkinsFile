@@ -27,6 +27,31 @@ pipeline {
                          sh props.mavenClean
                          echo 'BUILD SUCCESS'
                         }    
-                   }
+                   }    
             }
+    }
+    pipeline {
+        def server = Artifactory.server 'Artifactory'
+              stage('Artfactory download'){
+                  def downloadSpec ="""{
+                  "files": [
+                   {
+                "pattern" : "$project_path/target/*.jar",
+                "target": "$project_path/target"
+                   }
+               ]
+            }"""
+             server.download(downloadSpec)
+         }
+      stage("Artifactory upload") {
+        def uploadSpec = """{
+        "files":[
+        {
+         "pattern" : "$project_path/target/*.jar",
+        "target": "$project_path/target" 
+         }
+         ]
+        }"""
+        server.upload(uploadSpec)
+         }
     }
