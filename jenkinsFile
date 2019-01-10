@@ -11,7 +11,7 @@ pipeline {
                }
                stage('read git url file..') {
                   steps {
-                         giturl: props.gitUrl,
+                         git url: props.gitUrl,
                          branch: props.branchName
                          echo 'Read SUCCESS'
                         }    
