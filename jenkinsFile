@@ -14,6 +14,8 @@ pipeline {
                          git url: props.gitUrl,
                          branch: props.branchName
                          echo 'Read SUCCESS'
+                         gitURL=${git url}
+                         branch=${branch}
                          echo "gitURL=${git url}"
                         }    
                    }
@@ -31,8 +33,8 @@ pipeline {
                    }
               stage('Git read') {
                       steps {
-                           git url: ${git url}
-              branch: ${branch}
+                           git url: gitURL
+              branch: branch
                            echo 'Read success'
                        }
                 }
