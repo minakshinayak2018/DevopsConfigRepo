@@ -5,7 +5,7 @@ pipeline {
                   steps {
                        script {
                              props = readProperties file:'commonUtility/pipeline.properties'
-			     deploProps = readProperties file:'commonUtility/dockerDeployment.properties'
+			     deployProps = readProperties file:'commonUtility/dockerDeployment.properties'
                              echo 'LOAD SUCCESS'
                              }
                       }    
