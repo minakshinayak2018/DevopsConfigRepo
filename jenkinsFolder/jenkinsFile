@@ -5,6 +5,7 @@ pipeline {
                   steps {
                        script {
                              props = readProperties file:'commonUtility/pipeline.properties'
+			     deploProps = readProperties file:'commonUtility/dockerDeployment.properties'
                              echo 'LOAD SUCCESS'
                              }
                       }    
@@ -45,5 +46,26 @@ pipeline {
 				echo 'UPLOAD ARTIFACT SUCCESS'
 				}
 			}
-                  }
-           }
+			stage('DEPLOY') {
+                  steps {
+		  	script {
+				try	{
+					sh deployProps.dockerContainerId
+					output=readFile('result').trim()
+					if(output!=null)
+					{
+					sh deployProps.dockerContainerRm
+					}
+					}catch (err)
+					{
+					echo 'DELETE FAILED'
+					}
+					sh deployProps.dockerDeploy
+					sh deployProps.dockerRestart
+					echo 'DEPLOY SUCCESS'	
+				      }			
+				  
+                               }
+                       }
+                }
+         }
