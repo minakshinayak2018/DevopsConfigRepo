@@ -27,23 +27,24 @@ pipeline {
                          sh props.mavenClean
                          echo 'BUILD SUCCESS'
                         }    
-                   }    
-             stage('Upload') {
-                 steps {
-                     script {
-	                 server = Artifactory.server props.ARTIFACTORY_ID
-		         uploadSpec = """{
-		         "files":[
-                          {
-                         "pattern" : "target/*.jar",
-                         "target"  : "jenkins-snapshot" 
-                          }
-                       ]
-                    }"""
-		         server.upload(uploadSpec)
-	                 echo "UPLOAD SUCCESS"
-                       }
-	           }
-               }
+                   } 
+		   stage('UPLOAD ARTIFACT') {
+                  steps {
+			script {
+				server = Artifactory.server props.ARTIFACTORY_ID
+				uploadSpec = """{
+                		"files": [
+                    		{
+                       			"pattern": "target/*.war",
+                        		"target": "app-repo/target/"
+                    		}
+                    		]
+                		}"""
+            			server.upload(uploadSpec)
+				}
+				echo 'UPLOAD ARTIFACT SUCCESS'
+				}
+			}
+                  }
            }
      }
