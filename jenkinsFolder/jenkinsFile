@@ -28,22 +28,22 @@ pipeline {
                          echo 'BUILD SUCCESS'
                         }    
                    }    
-            }
-stage('Upload') {
-    steps {
-        script {
-	        server = Artifactory.server props.ARTIFACTORY_ID
-		    uploadSpec = """{
-		    "files":[
-            {
-           "pattern" : "target/*.jar",
-           "target"  : "jenkins-snapshot" 
-            }
-          ]
-       }"""
-		server.upload(uploadSpec)
-	    echo "UPLOAD SUCCESS"
-            }
-	 }
-      }
-   }
+             stage('Upload') {
+                 steps {
+                     script {
+	                 server = Artifactory.server props.ARTIFACTORY_ID
+		         uploadSpec = """{
+		         "files":[
+                          {
+                         "pattern" : "target/*.jar",
+                         "target"  : "jenkins-snapshot" 
+                          }
+                       ]
+                    }"""
+		         server.upload(uploadSpec)
+	                 echo "UPLOAD SUCCESS"
+                       }
+	           }
+               }
+           }
+     }
