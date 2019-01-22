@@ -4,7 +4,9 @@ pipeline {
            stage('load properties file..') {
                   steps {
                        script {
-                             props = readProperties file:'commonUtility/pipeline.properties'
+                             gitProp = readProperties file:'commonUtility/git.properties'
+			     commonProp = readProperties file:'commonUtility/common.properties'
+			     artifactoryProp = readProperties file:'commonUtility/artifactory.properties'
 			     deployProps = readProperties file:'commonUtility/dockerDeployment.properties'
                              echo 'LOAD SUCCESS'
                              }
@@ -12,27 +14,27 @@ pipeline {
                }
                stage('read git url file..') {
                   steps {
-                         git url: props.gitUrl,
-                         branch: props.branchName
+                         git url: gitProp.gitUrl,
+                         branch: gitProp.branchName
                          echo 'READ SUCCESS'
                         }    
                    }
               stage('sonar scan..') {
                   steps {
-                         sh props.buildSonarScan
+                         sh commonProp.buildSonarScan
                          echo 'SONAR SCAN SUCCESS'
                         }    
                    }
               stage('maven build..') {
                   steps {
-                         sh props.mavenClean
+                         sh commonProp.mavenClean
                          echo 'BUILD SUCCESS'
                         }    
                    } 
 		   stage('UPLOAD ARTIFACT') {
                   steps {
 			script {
-				server = Artifactory.server props.ARTIFACTORY_ID
+				server = Artifactory.server artifactoryProp.ARTIFACTORY_ID
 				uploadSpec = """{
                 		"files": [
                     		{
