@@ -43,8 +43,7 @@ stage('Upload') {
        }"""
 		server.upload(uploadSpec)
 	    echo "UPLOAD SUCCESS"
-         }
+            }
 	 }
-	
-}
-    }
+      }
+   }
