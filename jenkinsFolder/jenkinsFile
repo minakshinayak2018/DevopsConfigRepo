@@ -7,7 +7,7 @@ pipeline {
                              gitProp = readProperties file:'commonUtility/git.properties'
 			     commonProp = readProperties file:'commonUtility/common.properties'
 			     artifactoryProp = readProperties file:'commonUtility/artifactory.properties'
-			     deployProps = readProperties file:'commonUtility/dockerDeployment.properties'
+			     deployProps = readProperties file:'propertiesFiles/deploy.properties'
                              echo 'LOAD SUCCESS'
                              }
                       }    
