@@ -58,7 +58,6 @@ pipeline {
 					{
 					sh deployProps.dockerContainerRm
 					}
-					}	
 					}catch (err)
 					{
 					echo 'DELETE FAILED'
