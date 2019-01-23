@@ -4,9 +4,9 @@ pipeline {
            stage('load properties file..') {
                   steps {
                        script {
-                             gitProp = readProperties file:'commonUtility/git.properties'
-			     commonProp = readProperties file:'commonUtility/common.properties'
-			     artifactoryProp = readProperties file:'commonUtility/artifactory.properties'
+                             gitProp = readProperties file:'propertiesFiles/git.properties'
+			     commonProp = readProperties file:'propertiesFiles/common.properties'
+			     artifactoryProp = readProperties file:'propertiesFiles/artifactory.properties'
 			     deployProps = readProperties file:'propertiesFiles/deploy.properties'
                              echo 'LOAD SUCCESS'
                              }
