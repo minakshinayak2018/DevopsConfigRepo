@@ -62,7 +62,9 @@ pipeline {
 					{
 					  echo 'DELETE FAILED'
 					}
+					echo deployProps.dockerImageDeploy
 					sh deployProps.dockerImageDeploy
+					echo deployProps.dockerRestart
 					sh deployProps.dockerRestart
 					echo 'DEPLOY SUCCESS'	
 				     	}	
