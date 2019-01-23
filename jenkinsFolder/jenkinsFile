@@ -48,10 +48,10 @@ pipeline {
 				echo 'UPLOAD ARTIFACT SUCCESS'
 				}
 			}
-			stage('DEPLOY') {
+		stage('DEPLOY') {
                   steps {
 		  	script {
-				try	{
+				  try   {
 					sh deployProps.dockerContainerId
 					output=readFile('result').trim()
 					if(output!=null)
@@ -60,13 +60,12 @@ pipeline {
 					}
 					}catch (err)
 					{
-					echo 'DELETE FAILED'
+					  echo 'DELETE FAILED'
 					}
 					sh deployProps.dockerDeploy
 					sh deployProps.dockerRestart
 					echo 'DEPLOY SUCCESS'	
 				     	}	
-				  
                                }
                        }
                 }
