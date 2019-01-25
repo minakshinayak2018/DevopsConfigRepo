@@ -53,6 +53,8 @@ pipeline {
 		stage('DEPLOY') {
                   steps {
 		  	script {
+				dir(env.WORKSPACE)
+				{
 				  try   {
 					 echo env.WORKSPACE
 					sh deployProps.dockerContainerId
@@ -70,7 +72,8 @@ pipeline {
 					sh deployProps.dockerImageDeploy
 					echo deployProps.dockerRestart
 					sh deployProps.dockerRestart
-					echo 'DEPLOY SUCCESS'	
+					echo 'DEPLOY SUCCESS'
+					}
 				     	}	
                                }
                        }
