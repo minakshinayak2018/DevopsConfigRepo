@@ -83,7 +83,7 @@ pipeline {
              emailext (
                 subject: subject,
                 body: details,
-                to: commonProps.recipients
+                to: commonProp.recipients
                )
 	       echo "EMAIL NOTIFICATION SUCCESS"
                              }
