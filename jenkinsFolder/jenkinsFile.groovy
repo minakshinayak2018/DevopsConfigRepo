@@ -53,8 +53,7 @@ pipeline {
 		stage('DEPLOY') {
                   steps {
 		  	script {
-				dir(env.WORKSPACE)
-				{
+				sh cp /var/lib/jenkins/workspace/DevopsEndToEnd  /var/lib/jenkins/workspace/DevopsEndToEnd@tmp
 				  try   {
 					 echo env.WORKSPACE
 					sh deployProps.dockerContainerId
@@ -73,7 +72,6 @@ pipeline {
 					echo deployProps.dockerRestart
 					sh deployProps.dockerRestart
 					echo 'DEPLOY SUCCESS'
-					}
 				     	}	
                                }
                        }
