@@ -8,7 +8,7 @@ pipeline {
 			     commonProp = readProperties file:'propertiesFiles/common.properties'
 			     artifactoryProp = readProperties file:'propertiesFiles/artifactory.properties'
 			     deployProps = readProperties file:'propertiesFiles/deploy.properties'
-			     emailNotification = load file:'config/reUsable.groovy'
+			     emailNotification = readProperties file:'config/reUsable.groovy'
                              echo 'LOAD SUCCESS'
                              }
                       }    
