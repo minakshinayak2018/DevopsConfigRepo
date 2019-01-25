@@ -46,6 +46,7 @@ pipeline {
             			server.upload(uploadSpec)
 				}
 				echo 'UPLOAD ARTIFACT SUCCESS'
+			  	echo env.WORKSPACE
 				}
 			}
 	   
@@ -53,6 +54,7 @@ pipeline {
                   steps {
 		  	script {
 				  try   {
+					 echo env.WORKSPACE
 					sh deployProps.dockerContainerId
 					output=readFile('result').trim()
 					if(output!=null)
