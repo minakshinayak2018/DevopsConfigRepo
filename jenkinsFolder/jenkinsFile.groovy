@@ -57,6 +57,7 @@ pipeline {
 					 echo env.WORKSPACE
 					sh deployProps.dockerContainerId
 					output=readFile('result').trim()
+					 echo env.WORKSPACE
 					if(output!=null)
 					{
 					sh deployProps.dockerContainerRm
