@@ -73,14 +73,18 @@ pipeline {
                                }
                        }
 	     stage('Sending email'){
+		     steps {
+			     script {
                               try{
-                               emailNotification.triggerEmail();
+                                sh emailNotification.triggerEmail();
                                } catch (e) {
                              currentBuild.result = "FAILED"
-                            emailNotification.triggerEmail();
+                            sh emailNotification.triggerEmail();
                          throw e
                          }
-	            }
+	                 }
+		     }
+                }
 	                        		
             }
     }
