@@ -74,7 +74,7 @@ pipeline {
 				     	}	
                                }
                        }
-		def("EMAIL NOTIFICATION") {
+		def("EMAIL NOTIFICATION")
                     	def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
                         def summary = "${subject} (${env.BUILD_URL})"
                         def details = """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
@@ -86,7 +86,6 @@ pipeline {
                 to: commonProps.recipients
                         )
 	       echo "EMAIL NOTIFICATION SUCCESS"
-                 }
-		
+                 		
             }
     }
