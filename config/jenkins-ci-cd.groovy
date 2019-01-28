@@ -5,8 +5,8 @@ pipeline {
                   steps {
                        script {
 		       	 gitProp = readProperties file:'./propertiesFiles/git.properties'
-			       commonProp = readProperties file:'./propertiesFiles/common.properties'
-			       artifactoryProp = readProperties file:'./propertiesFiles/artifactory.properties'
+			       commonProps = readProperties file:'./propertiesFiles/common.properties'
+			       artifactoryProps = readProperties file:'./propertiesFiles/artifactory.properties'
 			       deployProps = readProperties file:'./propertiesFiles/deploy.properties'
 			       configProp = load commonProp.configFile
 			       echo 'LOAD SUCCESS'
