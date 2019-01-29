@@ -24,7 +24,7 @@ node {
 		}
 			   
 stage('READ GIT') {
-	      jenkinsGroovy.checkOutRepo(gitProperties['gitAppRepo'], branchName,gitAccessKey);
+	      jenkinsGroovy.checkOutRepo(gitProp['gitAppRepo'], branchName,gitAccessKey);
               echo 'READ SUCCESS'
 	    }
 stage('SONAR SCAN') {
