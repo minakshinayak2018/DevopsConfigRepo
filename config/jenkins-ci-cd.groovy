@@ -66,6 +66,13 @@ stage('DEPLOY') {
 			echo 'DEPLOY SUCCESS'     
            } 
 stage('EMAIL NOTIFICATION') {
-			commonUtility.notifyBuild(env.BUILD_STATUS)
-			}
-           }
+	try {
+	commonUtility.notifyBuild(env.BUILD_STATUS)
+	}catch(err) {
+		echo env.BUILD_STATUS
+		currentBuild.result = "FAILED"
+		commonUtility.notifyBuild(env.BUILD_STATUS)
+		throw err
+	}
+     }
+ }
