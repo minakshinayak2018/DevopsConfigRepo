@@ -1,16 +1,16 @@
-def utilRepo,commonUtility
 pipeline {
 	agent any
         	stages {
 		stage('LOAD PROPERTIES FILES') {
                   steps {
                        script {
-		       	 gitProp = readProperties file:'./propertiesFiles/git.properties'
+		       	       gitProp = readProperties file:'./propertiesFiles/git.properties'
 			       commonProps = readProperties file:'./propertiesFiles/common.properties'
 			       artifactoryProps = readProperties file:'./propertiesFiles/artifactory.properties'
 			       deployProps = readProperties file:'./propertiesFiles/deploy.properties'
-			       utilRepo =jenkinsGroovy.gitCheckout(gitProp['gitUtilRepo'], gitProp['branchName'],gitProp['utilRepoCredentialsId']);
+			       utilRepo = ./propertiesFiles/gitCheckout.checkOutRepo(gitProp['gitUtilRepo'], gitProp['branchName'],gitProp['utilRepoCredentialsId']);
 			       commonUtility = load "util/commonUtility.groovy"
+			       echo utilRepo
 			       echo 'LOAD SUCCESS'
 				         }
 			            }
