@@ -9,7 +9,7 @@ pipeline {
 			       commonProps = readProperties file:'./propertiesFiles/common.properties'
 			       artifactoryProps = readProperties file:'./propertiesFiles/artifactory.properties'
 			       deployProps = readProperties file:'./propertiesFiles/deploy.properties'
-			       jenkinsGroovy = load './Properties/gitCheckout.groovy'
+			       jenkinsGroovy = load './propertiesFiles/gitCheckout.groovy'
 			       utilRepo = jenkinsGroovy(gitProp['gitUtilRepo'], gitProp['branchName'],gitProp['utilRepoCredentialsId']);
 			       commonUtility = load "./util/commonUtility.groovy"
 			       echo utilRepo
