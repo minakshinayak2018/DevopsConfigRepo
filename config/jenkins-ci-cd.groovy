@@ -1,13 +1,13 @@
 def utilRepo, commonUtility,commonShellCommands,jenkinsGroovy, gitProp,artifactoryProps,deployProps
-def gitAccess = 'e67dc0aa-09f5-481f-8980-24c6d8ab3234'
-def branchNameCheckout = 'master'
+def gitAccessKey = 'e67dc0aa-09f5-481f-8980-24c6d8ab3234'
+def branchName = 'master'
 def jenkinsRepo = 'https://github.com/minakshinayak2018/config-repo.git'
 
 node {
 	def gitCheckOutCalls 
 		stage('LOAD PROPERTIES FILES') {
-			git branch: branchNameCheckout,
-                        credentialsId: gitAccess, 
+			git branch: branchName,
+                        credentialsId: gitAccessKey, 
                         url: jenkinsRepo
 			
 		       	       gitProp = readProperties file:'./propertiesFiles/git.properties'
@@ -17,14 +17,14 @@ node {
 			       jenkinsGroovy = load './propertiesFiles/gitCheckout.groovy'
 			
 			//Util repo
-			       utilRepo = jenkinsGroovy.checkOutRepo(gitProp['gitUtilRepo'], branchNameCheckout,gitAccess);
+			       utilRepo = jenkinsGroovy.checkOutRepo(gitProp['gitUtilRepo'], branchName,gitAccessKey);
 			       commonUtility = load "./util/commonUtility.groovy"
 			       commonShellCommands = readProperties file:'./propertiesFiles/commonShellCommands.properties'
 			       echo 'LOAD SUCCESS'		      
 		}
 			   
 stage('READ GIT') {
-	      jenkinsGroovy.checkOutRepo(gitProperties['gitAppRepo'], branchToCheckOut,gitAccess);
+	      jenkinsGroovy.checkOutRepo(gitProperties['gitAppRepo'], branchName,gitAccessKey);
               echo 'READ SUCCESS'
 	    }
 stage('SONAR SCAN') {
