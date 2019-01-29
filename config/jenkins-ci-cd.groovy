@@ -10,9 +10,8 @@ node {
 			       utilRepo = jenkinsGroovy(gitProp.gitUtilRepo, gitProp.branchName,gitProp.utilRepoCredentialsId);
 			       commonUtility = load "./util/commonUtility.groovy"
 			       commonShellCommands = readProperties file:'./propertiesFiles/commonShellCommands.properties'
-			       echo 'LOAD SUCCESS'
-				         }
-			            }
+			       echo 'LOAD SUCCESS'		      
+		}
 			   
 stage('READ GIT') {
                     git url: gitProp.gitAppRepo,
