@@ -1,10 +1,7 @@
 def utilRepo, commonUtility,commonShellCommands,jenkinsGroovy, gitProp,artifactoryProps,deployProps
-pipeline {
-	agent any
-        	stages {
+node {
+	def gitCheckOutCalls 
 		stage('LOAD PROPERTIES FILES') {
-                  steps {
-                       script {
 		       	       gitProp = readProperties file:'./propertiesFiles/git.properties'
 			       commonProps = readProperties file:'./propertiesFiles/common.properties'
 			       artifactoryProps = readProperties file:'./propertiesFiles/artifactory.properties'
@@ -16,35 +13,21 @@ pipeline {
 			       echo 'LOAD SUCCESS'
 				         }
 			            }
-			   }
+			   
 stage('READ GIT') {
-        steps {
- 	   script {
                     git url: gitProp.gitAppRepo,
                     branch: gitProp.branchName
                     echo 'READ SUCCESS'
-                   }
-	        }
 	    }
 stage('SONAR SCAN') {
-        steps {
-            script {
                 sh commonShellCommands.buildSonarScan
                 echo 'SONAR SCAN SUCCESS'
-	             }
-                }
 	   }
 stage('BUILD') {
-          steps {
-              script {
                     sh commonShellCommands.mavenClean
 		    echo 'BUILD SUCCESS'
-                      }
-               }
            }
  stage('UPLOAD ARTIFACT') {
-            steps {
-		 script {
 		      server = Artifactory.server artifactoryProps.ARTIFACTORY_ID
 		      uploadSpec = """{
                 	"files": [
@@ -57,12 +40,8 @@ stage('BUILD') {
                 	}"""
                      server.upload(uploadSpec)
 		     echo ' UPLOAD ARTIFACT SUCCESS'
-			   }
-	             }
 	       }
 stage('DEPLOY') {
-         steps {
-             script {
                  try   {
 			sh deployProps.dockerContainerId
 			output=readFile('result').trim()
@@ -76,16 +55,9 @@ stage('DEPLOY') {
 			}
 			sh deployProps.dockerImageDeploy
 			sh deployProps.dockerRestart
-			echo 'DEPLOY SUCCESS'
-			}
-                  }         
+			echo 'DEPLOY SUCCESS'     
            } 
 stage('EMAIL NOTIFICATION') {
-		steps{
-		   script {
 			commonUtility.notifyBuild(env.BUILD_STATUS)
-				    }
-			     }
 			}
-     	         }
-    }
+           }
