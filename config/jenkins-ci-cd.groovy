@@ -17,7 +17,7 @@ node {
 			       jenkinsGroovy = load './propertiesFiles/gitCheckout.groovy'
 			
 			//Util repo
-			       utilRepo = jenkinsGroovy.checkOutRepo(gitProp['gitUtilRepo'], branch,credentialsId);
+			       utilRepo = jenkinsGroovy.checkOutRepo(gitProp['gitUtilRepo'], branchNameCheckout,gitAccess);
 			       commonUtility = load "./util/commonUtility.groovy"
 			       commonShellCommands = readProperties file:'./propertiesFiles/commonShellCommands.properties'
 			       echo 'LOAD SUCCESS'		      
