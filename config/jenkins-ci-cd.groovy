@@ -1,5 +1,5 @@
 def utilRepo, commonUtility,commonShellCommands,jenkinsGroovy, gitProp,artifactoryProps,deployProps
-def gitAccess = e67dc0aa-09f5-481f-8980-24c6d8ab3234
+def gitAccess = 'e67dc0aa-09f5-481f-8980-24c6d8ab3234'
 def branchNameCheckout = 'master'
 def jenkinsRepo = 'https://github.com/minakshinayak2018/config-repo.git'
 
@@ -17,7 +17,7 @@ node {
 			       jenkinsGroovy = load './propertiesFiles/gitCheckout.groovy'
 			
 			//Util repo
-			       utilRepo = jenkinsGroovy.checkOutRepo(gitProp['gitUtilRepo'], gitProp['branchName'],gitProp['utilRepoCredentialsId']);
+			       utilRepo = jenkinsGroovy.checkOutRepo(gitProp['gitUtilRepo'], branch,credentialsId);
 			       commonUtility = load "./util/commonUtility.groovy"
 			       commonShellCommands = readProperties file:'./propertiesFiles/commonShellCommands.properties'
 			       echo 'LOAD SUCCESS'		      
