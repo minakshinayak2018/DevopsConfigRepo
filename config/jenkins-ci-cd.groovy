@@ -12,7 +12,7 @@ pipeline {
 			       jenkinsGroovy = load './propertiesFiles/gitCheckout.groovy'
 			       utilRepo = jenkinsGroovy(gitProp.gitUtilRepo, gitProp.branchName,gitProp.utilRepoCredentialsId);
 			       commonUtility = load "./util/commonUtility.groovy"
-			       commonShellCommands = readProperties file:'./propertiesFiles/commonShellCommands.properties
+			       commonShellCommands = readProperties file:'./propertiesFiles/commonShellCommands.properties'
 			       echo 'LOAD SUCCESS'
 				         }
 			            }
