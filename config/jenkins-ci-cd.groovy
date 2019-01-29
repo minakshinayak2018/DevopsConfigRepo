@@ -1,4 +1,4 @@
-def utilRepo,commonUtility
+def utilRepo,commonUtility,jenkinsGroovy
 pipeline {
 	agent any
         	stages {
@@ -9,8 +9,9 @@ pipeline {
 			       commonProps = readProperties file:'./propertiesFiles/common.properties'
 			       artifactoryProps = readProperties file:'./propertiesFiles/artifactory.properties'
 			       deployProps = readProperties file:'./propertiesFiles/deploy.properties'
-			       utilRepo = ./propertiesFiles/gitCheckout.checkOutRepo(gitProp['gitUtilRepo'], gitProp['branchName'],gitProp['utilRepoCredentialsId']);
-			       commonUtility = load "util/commonUtility.groovy"
+			       jenkinsGroovy = load './Properties/gitCheckout.groovy'
+			       utilRepo = jenkinsGroovy(gitProp['gitUtilRepo'], gitProp['branchName'],gitProp['utilRepoCredentialsId']);
+			       commonUtility = load "./util/commonUtility.groovy"
 			       echo utilRepo
 			       echo 'LOAD SUCCESS'
 				         }
