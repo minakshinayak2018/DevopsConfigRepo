@@ -1,5 +1,5 @@
 def utilRepo,commonUtility,
-def credentialsId= 'e67dc0aa-09f5-481f-8980-24c6d8ab3234'
+def credentialsId = 'e67dc0aa-09f5-481f-8980-24c6d8ab3234'
 pipeline {
 	agent any
         	stages {
